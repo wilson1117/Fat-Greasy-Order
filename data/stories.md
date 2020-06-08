@@ -1,7 +1,13 @@
-## story_order
-* order
-  - utter_order
+## story_startOrder
+* startOrder
+  - utter_startOrder
 
-## story_orderFood
-* orderFood
-  - respond_orderFood
+## story_foodOrder
+* foodCount
+  - utter_foodCount
+* count
+  - action_foodOrder
+
+## story_foodOrderFull
+* foodOrder+foodCount
+  - action_foodOrder

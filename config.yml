@@ -4,6 +4,8 @@ language: zh
 pipeline:
   - name: JiebaTokenizer
     dictionary_path: "dict.txt"
+    intent_tokenization_flag: True
+    intent_split_symbol: "+"
   - name: CountVectorsFeaturizer
   - name: CountVectorsFeaturizer
     analyzer: "char_wb"

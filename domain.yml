@@ -1,14 +1,28 @@
 intents:
-  - order
-  - orderFood
+  - startOrder
+  - foodOrder
+  - foodCount
+  - foodOrder+foodCount
 
-actions:
-  - respond_orderFood
-  
 
 responses:
-  utter_order:
+  utter_startOrder:
   - text: "你好，請問要點些什麼呢？"
+  utter_foodCount:
+  - text: "請問需要幾個呢？"
+
+actions:
+  - action_foodOrder
+
+slots:
+  food:
+    type: text
+  count:
+    type: float
+
+entities:
+  - food
+  - count
 
 session_config:
   session_expiration_time: 60
