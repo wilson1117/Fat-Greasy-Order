@@ -3,9 +3,9 @@
   - utter_startOrder
 
 ## story_foodOrder
-* foodCount
+* foodOrder
   - utter_foodCount
-* count
+* foodCount
   - action_foodOrder
 
 ## story_foodOrderFull
