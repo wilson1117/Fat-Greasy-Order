@@ -1,56 +1,14 @@
-## intent:greet
-- hey
-- hello
-- hi
-- good morning
-- good evening
-- hey there
+## intent: order
+- 點餐
 
-## intent:goodbye
-- bye
-- goodbye
-- see you around
-- see you later
+## intent: orderFood/food
+- [鳳梨披薩](food)
+- [珍珠披薩](food)
+- [臭豆腐雞排](food)
 
-## intent:affirm
-- yes
-- indeed
-- of course
-- that sounds good
-- correct
-
-## intent:deny
-- no
-- never
-- I don't think so
-- don't like that
-- no way
-- not really
-
-## intent:mood_great
-- perfect
-- very good
-- great
-- amazing
-- wonderful
-- I am feeling very good
-- I am great
-- I'm good
-
-## intent:mood_unhappy
-- sad
-- very sad
-- unhappy
-- bad
-- very bad
-- awful
-- terrible
-- not very good
-- extremely sad
-- so sad
-
-## intent:bot_challenge
-- are you a bot?
-- are you a human?
-- am I talking to a bot?
-- am I talking to a human?
+## intent: orderFood/drink
+- [吉娃娃絲襪珍珠奶茶](drink)
+- [古早味阿嬤紅茶](drink)
+- [手工熬煮冬瓜茶](drink)
+- [肥宅快樂水](drink)
+- [心痛痛的滋味](drink)

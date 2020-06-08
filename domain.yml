@@ -1,9 +1,14 @@
 intents:
-  - wanna_order
+  - order
+  - orderFood
+
+actions:
+  - respond_orderFood
+  
 
 responses:
-  utter_greet:
-  - text: "好的 請問要點什麼嗎"
+  utter_order:
+  - text: "你好，請問要點些什麼呢？"
 
 session_config:
   session_expiration_time: 60

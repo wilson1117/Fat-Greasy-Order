@@ -12,6 +12,8 @@ pipeline:
   - name: DIETClassifier
     epochs: 300
   - name: EntitySynonymMapper
+  - name: ResponseSelector
+    retrieval_intent: orderFood
 
 # Configuration for Rasa Core.
 # https://rasa.com/docs/rasa/core/policies/
