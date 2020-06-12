@@ -5,7 +5,7 @@
 - [鳳梨披薩](food)
 - [珍珠披薩](food)
 - [臭豆腐雞排](food)
-- [吉娃娃絲襪珍珠奶茶](food)
+- [吉娃娃絲襪奶茶](food)
 - [古早味阿嬤紅茶](food)
 - [手工熬煮冬瓜茶](food)
 - [肥宅快樂水](food)
@@ -18,4 +18,7 @@
 
 ## intent: foodOrder+foodCount
 - 我要[1](count)個[鳳梨披薩](food)
-- 我要[1](count)杯[吉娃娃絲襪珍珠奶茶](food)
+- 我要[3](count)份[鳳梨披薩](food)
+- [2](count)杯[手工黑糖冬瓜茶](food)
+- [3](count)片[珍珠披薩](food)
+- 我要[1](count)杯[吉娃娃絲襪奶茶](food)

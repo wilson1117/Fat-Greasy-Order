@@ -3,6 +3,7 @@ intents:
   - foodOrder
   - foodCount
   - foodOrder+foodCount
+  - order_check
 
 
 responses:
@@ -10,9 +11,12 @@ responses:
   - text: "你好，請問要點些什麼呢？"
   utter_foodCount:
   - text: "請問需要幾個呢？"
+  utter_noneOrder:
+  - text: "不好意思 您還沒點餐"
 
 actions:
-  - action_foodOrder
+  - action_food_order
+  - action_start_order
 
 slots:
   food:
