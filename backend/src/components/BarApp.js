@@ -13,7 +13,12 @@ const useStyles = makeStyles((theme) => ({
     },
     title: {
         flexGrow: 1,
+        color:'#000'
     },
+    bgcolor:{
+        background:'#81d4fa',
+        
+    }
 }));
 
 export default function BarApp() {
@@ -22,10 +27,10 @@ export default function BarApp() {
     return (
         <div className={classes.root}>
             <AppBar>
-                <Toolbar>
-                    <img src="../assets/logo.png" alt=""/>
+                <Toolbar className={classes.bgcolor}>
+                    <img src={require('../assets/logo.png')} alt="" style={{width:'5%',height:'5%'}}/>
                     <Typography variant="h6" className={classes.title}>
-                        吉娃娃美食 後台餐廳
+                        ～肥宅油膩指定～後台訂單
                     </Typography>
                 </Toolbar>
             </AppBar>

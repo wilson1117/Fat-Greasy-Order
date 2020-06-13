@@ -2,12 +2,16 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './components/App.js';
 import BarApp from './components/BarApp.js'
+import OrderCard from './components/OrderCard.js'
+import NewOrder from './components/NewOrder.js'
 import * as serviceWorker from './serviceWorker';
 
 ReactDOM.render(
   <React.StrictMode>
     <BarApp/>
+    <OrderCard/>
     <App />
+    <NewOrder/>
   </React.StrictMode>,
   document.getElementById('root')
 );
