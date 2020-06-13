@@ -4,6 +4,9 @@ intents:
   - foodCount
   - foodOrder+foodCount
   - order_check
+  - ice_select
+  - suger_select
+  - ice_select+suger_select
 
 
 responses:
@@ -17,6 +20,7 @@ responses:
 actions:
   - action_food_order
   - action_start_order
+  - action_option_select
 
 slots:
   food:

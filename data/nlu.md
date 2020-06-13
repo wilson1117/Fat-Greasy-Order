@@ -22,3 +22,36 @@
 - [2](count)杯[手工黑糖冬瓜茶](food)
 - [3](count)片[珍珠披薩](food)
 - 我要[1](count)杯[吉娃娃絲襪奶茶](food)
+
+
+## intent: ice_select
+- 冰塊[正常](ice_type:正常冰)
+- [少冰](ice_type)
+- 我要[少冰](ice_type)
+- [微冰](ice_type)
+- 我要[微冰](ice_type)
+- [去冰](ice_type)
+- 我要[去冰](ice_type)
+
+## intent: suger_select
+- 甜度[台南](suger_type)
+- 我要[台南]甜度(suger_type)
+- [正常](suger_type:全糖)甜
+- [全糖](suger_type)
+- 我要[全糖](suger_type)
+- [半糖](suger_type)
+- 我要[半糖](suger_type)
+- [微糖](suger_type)
+- 我要[微糖](suger_type)
+- [無糖](suger_type)
+- 我要[無糖](suger_type)
+
+## intent: ice_select+suger_select
+- [半糖](suger_type)[少冰](ice_type)
+- [微糖](suger_type)[去冰](ice_type)
+- [全糖](suger_type)[正常](ice_type:正常冰)
+- [半糖](suger_type)[少冰](ice_type)
+- [半](suger_type:半糖)[少](ice_type:少冰)
+- [全](suger_type:全糖)[微](ice_type:微冰)
+- [半](suger_type:半糖)[去](ice_type:去冰)
+- [台南](suger_type)[去冰](suger_type)
