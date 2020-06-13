@@ -7,6 +7,7 @@ intents:
   - ice_select
   - suger_select
   - ice_select+suger_select
+  - size_select
 
 
 responses:
@@ -31,12 +32,15 @@ slots:
     type: text
   ice_type:
     type: text
+  size:
+    type: text
 
 entities:
   - food
   - count
   - suger_type
   - ice_type
+  - size
 
 session_config:
   session_expiration_time: 60

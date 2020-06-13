@@ -25,7 +25,7 @@
 
 
 ## intent: ice_select
-- 冰塊[正常](ice_type:正常冰)
+- 冰塊[正常](ice_type)
 - [少冰](ice_type)
 - 我要[少冰](ice_type)
 - [微冰](ice_type)
@@ -36,7 +36,7 @@
 ## intent: suger_select
 - 甜度[台南](suger_type)
 - 我要[台南]甜度(suger_type)
-- [正常](suger_type:全糖)甜
+- [正常](suger_type)甜
 - [全糖](suger_type)
 - 我要[全糖](suger_type)
 - [半糖](suger_type)
@@ -49,9 +49,73 @@
 ## intent: ice_select+suger_select
 - [半糖](suger_type)[少冰](ice_type)
 - [微糖](suger_type)[去冰](ice_type)
-- [全糖](suger_type)[正常](ice_type:正常冰)
+- [全糖](suger_type)[正常](ice_type)
 - [半糖](suger_type)[少冰](ice_type)
-- [半](suger_type:半糖)[少](ice_type:少冰)
-- [全](suger_type:全糖)[微](ice_type:微冰)
-- [半](suger_type:半糖)[去](ice_type:去冰)
+- [半](suger_type)[少](ice_type)
+- [全](suger_type)[微](ice_type)
+- [半](suger_type)[去](ice_type)
 - [台南](suger_type)[去冰](suger_type)
+
+## intent: size_select
+- [大杯](size)
+- [中杯](size)
+- [小杯](size)
+- 我要[大杯]的(size)
+- 我要[中杯]的(size)
+- 我要[小杯]的(size)
+- [大的](size)
+- [中的](size)
+- [小的](size)
+- 我要[大的](size)
+- 我要[中的](size)
+- 我要[小的](size)
+
+
+## synonym:半糖
+- 半
+- 半糖
+
+## synonym:全糖
+- 全
+- 全糖
+- 正常
+
+## synonym:少糖
+- 少
+- 少糖
+
+## synonym:無糖
+- 無糖
+- 無
+
+## synonym:微冰
+- 微
+- 微冰
+
+## synonym:正常冰
+- 正常
+- 正常冰
+
+## synonym:少冰
+- 少
+- 少冰
+
+## synonym:去冰
+- 去冰
+- 去
+
+## synonym:大杯
+- 大杯
+- 大
+- 大的
+
+## synonym:中杯
+- 中杯
+- 中
+- 中的
+- 不大不小
+
+## synonym:小杯
+- 小杯
+- 小
+- 小的

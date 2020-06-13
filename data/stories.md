@@ -23,3 +23,7 @@
 ## story_ice_suger_option
 * ice_select+suger_select
   - action_option_select
+
+## story_size_select
+* size_select
+  - action_option_select

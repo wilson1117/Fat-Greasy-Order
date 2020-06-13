@@ -60,7 +60,12 @@ class OrderMethod:
 
     @staticmethod
     def repeat_order(order):
-        return "%d%s%s %s" % (order["count"], order["unit"], order["name"], order["plus"].values().join(" "))
+        return "%d%s%s %s" % (
+            int(order["count"]),
+            order["unit"],
+            order["name"],
+            " ".join(order["plus"].values())
+        )
 
 
 class ActionFoodOrder(Action):
@@ -89,6 +94,7 @@ class ActionFoodOrder(Action):
                 ording = None
             ording = {
                 "_id": detail["_id"],
+                "unit": detail["unit"],
                 "name": food,
                 "count": int(count),
                 "options": [DB.get_option(
@@ -135,6 +141,25 @@ class ActionOptionSelect(Action):
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
         intent = tracker.latest_message['intent'].get('name')
+        if intent == "suger_select" or intent == "ice_select+suger_select":
+            suger = tracker.get_slot("suger_type")
+            found = False
+            for key in range(len(ording["options"])):
+                if ording["options"][key]["_id"] == ObjectId("5edda69d338a12e97ab1a902"):
+                    found = True
+                    if suger in ording["options"][key]["options"]:
+                        ording["plus"]["suger"] = suger
+                    else:
+                        dispatcher.utter_message(f"不好意思 我們沒有{suger}的選項喔")
+                    break
+                if ording["options"][key]["_id"] == ObjectId("5edda4ef338a12e97ab1a900"):
+                    found = True
+                    if suger in DB.get_option("5edda630338a12e97ab1a901")["options"]:
+                        ording["plus"]["suger"] = suger
+                    else:
+                        dispatcher.utter_message(f"不好意思 我們沒有{suger}的選項喔")
+            if not found:
+                dispatcher.utter_message("不好意思 %s沒有甜度的選擇喔" % ording["name"])
         if intent == "ice_select" or intent == "ice_select+suger_select":
             ice = tracker.get_slot("ice_type")
             found = False
@@ -155,26 +180,19 @@ class ActionOptionSelect(Action):
                         dispatcher.utter_message(f"不好意思 我們沒有{ice}的選項喔")
             if not found:
                 dispatcher.utter_message("不好意思 %s沒有冰塊的選擇喔" % ording["name"])
-        if intent == "suger_select" or intent == "ice_select+suger_select":
-            suger = tracker.get_slot("suger_type")
+        if intent == "size_select":
+            size = tracker.get_slot("size")
             found = False
             for key in range(len(ording["options"])):
-                if ording["options"][key]["_id"] == ObjectId("5edda69d338a12e97ab1a902"):
+                if ording["options"][key]["_id"] == ObjectId("5ede2ded338a12e97ab1a903"):
                     found = True
-                    if suger in ording["options"][key]["options"]:
-                        ording["plus"]["suger"] = suger
+                    if size in ording["options"][key]["options"]:
+                        ording["plus"]["size"] = size
                     else:
-                        dispatcher.utter_message(f"不好意思 我們沒有{suger}的選項喔")
+                        dispatcher.utter_message(f"不好意思 我們沒有{size}的選項喔")
                     break
-                if ording["options"][key]["_id"] == ObjectId("5edda4ef338a12e97ab1a900"):
-                    found = True
-                    if suger in DB.get_option("5edda630338a12e97ab1a901")["options"]:
-                        ording["plus"]["suger"] = suger
-                    else:
-                        dispatcher.utter_message(f"不好意思 我們沒有{suger}的選項喔")
             if not found:
-                dispatcher.utter_message("不好意思 %s沒有甜度的選擇喔" % ording["name"])
-
+                dispatcher.utter_message("不好意思 %s沒有大小的選擇喔" % ording["name"])
         if OrderMethod.ask_option(dispatcher, tracker):
             dispatcher.utter_message(OrderMethod.repeat_order(ording))
             dispatcher.utter_message("請問還需要什麼嗎")
