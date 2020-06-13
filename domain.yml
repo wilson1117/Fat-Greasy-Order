@@ -27,10 +27,16 @@ slots:
     type: text
   count:
     type: float
+  suger_type:
+    type: text
+  ice_type:
+    type: text
 
 entities:
   - food
   - count
+  - suger_type
+  - ice_type
 
 session_config:
   session_expiration_time: 60
