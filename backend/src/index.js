@@ -10,8 +10,6 @@ ReactDOM.render(
   <React.StrictMode>
     <BarApp/>
     <OrderCard/>
-    <App />
-    <NewOrder/>
   </React.StrictMode>,
   document.getElementById('root')
 );

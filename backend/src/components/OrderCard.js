@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
@@ -6,11 +6,16 @@ import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
+import Snackbar from '@material-ui/core/Snackbar';
 
 const useStyles = makeStyles({
     root: {
-        maxWidth: '400px',
-        margin: '15vh 2vw'
+        minWidth: '400px',
+        height: 'auto',
+        margin: '2vh 3% 0 3%',
+        display: 'flex',
+        justifyContent: 'center',
+        flexDirection: 'column',
     },
     title: {
         fontSize: 16,
@@ -25,46 +30,73 @@ const useStyles = makeStyles({
 
 export default function OrderCard() {
     const classes = useStyles();
-    const orderList = [
-        {
-            id:1,
-            date:"下午06:30",
-            order: "吉娃娃絲襪奶茶",
-            plus:"半糖微冰加大",
-            count: 1,
-        }
-    ]
+    const [orderList, setOrderList] = useState([]);
+    useEffect(() => {
+       let refresh = setInterval(getOrder, 1000);
+    }, [])
+
+    const getOrder = () => {
+        const apiURL = 'http://localhost:8000/';
+        fetch(apiURL)
+            .then(res => res.json())
+            .then(data => {
+                setOrderList(data);
+                console.log("更新")
+
+            })
+            .catch((err) => {
+                console.log(err)
+            })
+    }
+
+    const delOrder = (index) => {
+        const apiURL = 'http://localhost:8000/del_order?_id='+index;
+        fetch(apiURL,{mode:'no-cors'})
+            .then(res => res.json())
+            .then(data => {
+                console.log(data)
+
+            })
+            .catch((err) => {
+                console.log(err)
+            })
+
+    }
+
 
     return (
-        <Card className={classes.root}>
-            <CardContent>
-                <Typography className={classes.wrap} color="textSecondary" gutterBottom>
-                    <span>訂單編號：001</span>
-                    <span>
-                        {new Intl.DateTimeFormat('zh-TW', {
-                            hour: 'numeric',
-                            minute: 'numeric',
-                        }).format(new Date())}
-                    </span>
-                </Typography>
-                <hr />
-                <Grid container spacing={4}>
-                    <Grid item xs={6}>
-                        吉娃娃絲襪奶茶
-                    </Grid>
-                    <Grid item xs={4}>
-                        半糖少冰 加大
-                    </Grid>
-                    <Grid item xs={2} text>
-                        x 1
-                    </Grid>
-                </Grid>
-            </CardContent>
+        <Grid container>
+            {orderList.map((item, index) =>
+                <Card className={classes.root}>
+                    <CardContent>
+                        <Typography className={classes.wrap} color="textSecondary" gutterBottom>
+                            <span>訂單編號：{`00${index + 1}`}</span>
+                            <span>{'外帶'}</span>
+                        </Typography>
+                        <hr />
+                        {item.food.map(food =>
+                            <Grid container spacing={2}>
+                                <Grid item xs={5}>
+                                    {food.name}
+                                </Grid>
+                                <Grid item xs={5}>
+                                    {food.plus?.ice ? food.plus.ice + ',' : ''}
+                                    {food.plus?.sugar ? food.plus.sugar + ',' : ''}
+                                    {food.plus?.size ? food.plus?.size : ''}
+                                </Grid>
+                                <Grid item xs={2} text>
+                                    {'x' + food.count}
+                                </Grid>
+                            </Grid>
 
-            <CardActions>
-                <Button variant="contained">✖</Button>
-                <Button variant="contained" color="secondary">✔</Button>
-            </CardActions>
-        </Card>
+                        )}
+                    </CardContent>
+
+                    <CardActions style={{ marginLeft: '75%' }}>
+                        <Button variant="contained" color="secondary" onClick={() => { delOrder(item._id) }}>✔</Button>
+                    </CardActions>
+                </Card>)}
+        </Grid>
+
     );
 }
