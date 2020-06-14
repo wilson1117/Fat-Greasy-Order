@@ -70,6 +70,18 @@
 - 我要[中的](size)
 - 我要[小的](size)
 
+## intent: want_finish
+- 這樣就好
+- 結束點餐
+- 這樣就好了
+- 這樣就好了謝謝
+- 就這些
+
+## intent: response_check
+- 沒錯
+- 是的
+- 正確
+- 沒問題
 
 ## synonym:半糖
 - 半

@@ -12,6 +12,9 @@ class OrderDB:
     def get_option(self, id):
         return self.db["options"].find_one({"_id": [ObjectId(id), id][type(id) == ObjectId]})
 
+    def insert_order(self, orderlist):
+        self.db["orderList"].insert_one(orderlist)
+
 # mongo = pymongo.MongoClient("mongodb://localhost:27017")
 
 

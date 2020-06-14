@@ -8,6 +8,8 @@ intents:
   - suger_select
   - ice_select+suger_select
   - size_select
+  - want_finish
+  - response_check
 
 
 responses:
@@ -22,6 +24,8 @@ actions:
   - action_food_order
   - action_start_order
   - action_option_select
+  - action_order_check
+  - action_send_order
 
 slots:
   food:

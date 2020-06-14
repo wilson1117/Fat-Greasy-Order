@@ -27,3 +27,10 @@
 ## story_size_select
 * size_select
   - action_option_select
+
+## story_order_finish
+* want_finish
+  - action_order_check
+* response_check
+  - action_send_order
+  

@@ -8,7 +8,7 @@ from bson.objectid import ObjectId
 DB = OrderDB()
 
 orderlist = []
-ording = None
+ordering = None
 asking_field = None
 
 
@@ -22,13 +22,13 @@ class OrderMethod:
 
     @staticmethod
     def ask_option(dispatcher: CollectingDispatcher, tracker: Tracker) -> bool:
-        if ording:
-            for option in ording["options"]:
+        if ordering:
+            for option in ordering["options"]:
                 if option["type"] == "group":
                     lost_all = True
                     lost_field = None
                     for field in option["options"].keys():
-                        if field in ording["plus"].keys():
+                        if field in ordering["plus"].keys():
                             lost_all = False
                         elif not lost_all:
                             o = DB.get_option(option["options"][field])
@@ -48,7 +48,7 @@ class OrderMethod:
                             OrderMethod.ask[o["type"]](o))
                         asking_field = lost_field
                         return False
-                elif not option["field"] in ording["plus"].keys():
+                elif not option["field"] in ordering["plus"].keys():
                     dispatcher.utter_message(
                         OrderMethod.ask[option["type"]](option))
                     asking_field = option["field"]
@@ -88,22 +88,23 @@ class ActionFoodOrder(Action):
         detail = DB.get_food_info(food)
 
         if(detail):
-            global ording
-            if ording:
-                orderlist.append(ording)
-                ording = None
-            ording = {
+            global ordering
+            if ordering:
+                orderlist.append(ordering)
+                ordering = None
+            ordering = {
                 "_id": detail["_id"],
                 "unit": detail["unit"],
                 "name": food,
+                "price": detail["price"],
                 "count": int(count),
                 "options": [DB.get_option(
                     option) for option in detail["options"]],
                 "plus": {}
             }
             if OrderMethod.ask_option(dispatcher, tracker):
-                orderlist.append(ording)
-                ording = None
+                orderlist.append(ordering)
+                ordering = None
                 dispatcher.utter_message("你點的是%d%s%s" %
                                          (int(count), detail["unit"], food))
                 dispatcher.utter_message("請問還需要什麼嗎")
@@ -125,9 +126,9 @@ class ActionStartOrder(Action):
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
         global orderlist
-        global ording
+        global ordering
         orderlist = []
-        ording = None
+        ordering = None
 
         dispatcher.utter_message(template="utter_startOrder")
         return [AllSlotsReset()]
@@ -144,64 +145,104 @@ class ActionOptionSelect(Action):
         if intent == "suger_select" or intent == "ice_select+suger_select":
             suger = tracker.get_slot("suger_type")
             found = False
-            for key in range(len(ording["options"])):
-                if ording["options"][key]["_id"] == ObjectId("5edda69d338a12e97ab1a902"):
+            for key in range(len(ordering["options"])):
+                if ordering["options"][key]["_id"] == ObjectId("5edda69d338a12e97ab1a902"):
                     found = True
-                    if suger in ording["options"][key]["options"]:
-                        ording["plus"]["suger"] = suger
+                    if suger in ordering["options"][key]["options"]:
+                        ordering["plus"]["suger"] = suger
                     else:
                         dispatcher.utter_message(f"不好意思 我們沒有{suger}的選項喔")
                     break
-                if ording["options"][key]["_id"] == ObjectId("5edda4ef338a12e97ab1a900"):
+                if ordering["options"][key]["_id"] == ObjectId("5edda4ef338a12e97ab1a900"):
                     found = True
                     if suger in DB.get_option("5edda630338a12e97ab1a901")["options"]:
-                        ording["plus"]["suger"] = suger
+                        ordering["plus"]["suger"] = suger
                     else:
                         dispatcher.utter_message(f"不好意思 我們沒有{suger}的選項喔")
             if not found:
-                dispatcher.utter_message("不好意思 %s沒有甜度的選擇喔" % ording["name"])
+                dispatcher.utter_message("不好意思 %s沒有甜度的選擇喔" % ordering["name"])
         if intent == "ice_select" or intent == "ice_select+suger_select":
             ice = tracker.get_slot("ice_type")
             found = False
 
-            for key in range(len(ording["options"])):
-                if ording["options"][key]["_id"] == ObjectId("5edda69d338a12e97ab1a902"):
+            for key in range(len(ordering["options"])):
+                if ordering["options"][key]["_id"] == ObjectId("5edda69d338a12e97ab1a902"):
                     found = True
-                    if ice in ording["options"][key]["options"]:
-                        ording["plus"]["ice"] = ice
+                    if ice in ordering["options"][key]["options"]:
+                        ordering["plus"]["ice"] = ice
                     else:
                         dispatcher.utter_message(f"不好意思 我們沒有{ice}的選項喔")
                     break
-                if ording["options"][key]["_id"] == ObjectId("5edda4ef338a12e97ab1a900"):
+                if ordering["options"][key]["_id"] == ObjectId("5edda4ef338a12e97ab1a900"):
                     found = True
                     if ice in DB.get_option("5edda69d338a12e97ab1a902")["options"]:
-                        ording["plus"]["ice"] = ice
+                        ordering["plus"]["ice"] = ice
                     else:
                         dispatcher.utter_message(f"不好意思 我們沒有{ice}的選項喔")
             if not found:
-                dispatcher.utter_message("不好意思 %s沒有冰塊的選擇喔" % ording["name"])
+                dispatcher.utter_message("不好意思 %s沒有冰塊的選擇喔" % ordering["name"])
         if intent == "size_select":
             size = tracker.get_slot("size")
             found = False
-            for key in range(len(ording["options"])):
-                if ording["options"][key]["_id"] == ObjectId("5ede2ded338a12e97ab1a903"):
+            for key in range(len(ordering["options"])):
+                if ordering["options"][key]["_id"] == ObjectId("5ede2ded338a12e97ab1a903"):
                     found = True
-                    if size in ording["options"][key]["options"]:
-                        ording["plus"]["size"] = size
+                    if size in ordering["options"][key]["options"]:
+                        ordering["plus"]["size"] = size
                     else:
                         dispatcher.utter_message(f"不好意思 我們沒有{size}的選項喔")
                     break
             if not found:
-                dispatcher.utter_message("不好意思 %s沒有大小的選擇喔" % ording["name"])
+                dispatcher.utter_message("不好意思 %s沒有大小的選擇喔" % ordering["name"])
         if OrderMethod.ask_option(dispatcher, tracker):
-            dispatcher.utter_message(OrderMethod.repeat_order(ording))
+            dispatcher.utter_message(OrderMethod.repeat_order(ordering))
             dispatcher.utter_message("請問還需要什麼嗎")
 
 
-# class ActionStartOrder(Action):
-# 	def name(self) -> Text:
-# 		return "action_start_order"
+class ActionOrderCheck(Action):
+    def name(self) -> Text:
+        return "action_order_check"
 
-# 	def run(self, dispatcher: CollectingDispatcher,
-# 			tracker: Tracker,
-# 			domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+    def run(self, dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+        global ordering
+        global orderlist
+        if ordering:
+            orderlist.append(ordering)
+            ordering = None
+        sum = 0
+        dispatcher.utter_message("您點的是")
+        for order in orderlist:
+            price = int(order["count"] * (order["price"] + [0, 15][(
+                "size" in order["plus"].keys()) and order["plus"]["size"] == "大杯"]))
+            dispatcher.utter_message(
+                "%s %d元" % (OrderMethod.repeat_order(order), price))
+            sum += price
+        dispatcher.utter_message("一共是%d元" % sum)
+        dispatcher.utter_message("餐點是否無誤")
+        return []
+
+
+class ActionSendOrder(Action):
+    def name(self) -> Text:
+        return "action_send_order"
+
+    def run(self, dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+        global ordering
+        global orderlist
+        global asking_field
+        food = [{
+            "name": order["name"],
+            "plus": order["plus"],
+            "count": order["count"]
+        } for order in orderlist]
+        DB.insert_order({"food": food})
+        dispatcher.utter_message("訂單已送出")
+        dispatcher.utter_message("謝謝惠顧")
+        orderlist = []
+        ordering = None
+        asking_field = None
+        return [AllSlotsReset()]
