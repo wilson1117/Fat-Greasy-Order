@@ -5,8 +5,8 @@ intents:
   - foodOrder+foodCount
   - order_check
   - ice_select
-  - suger_select
-  - ice_select+suger_select
+  - sugar_select
+  - ice_select+sugar_select
   - size_select
   - want_finish
   - response_check
@@ -32,7 +32,7 @@ slots:
     type: text
   count:
     type: float
-  suger_type:
+  sugar_type:
     type: text
   ice_type:
     type: text
@@ -42,7 +42,7 @@ slots:
 entities:
   - food
   - count
-  - suger_type
+  - sugar_type
   - ice_type
   - size
 

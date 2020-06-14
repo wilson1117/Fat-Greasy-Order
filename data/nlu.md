@@ -33,28 +33,28 @@
 - [去冰](ice_type)
 - 我要[去冰](ice_type)
 
-## intent: suger_select
-- 甜度[台南](suger_type)
-- 我要[台南]甜度(suger_type)
-- [正常](suger_type)甜
-- [全糖](suger_type)
-- 我要[全糖](suger_type)
-- [半糖](suger_type)
-- 我要[半糖](suger_type)
-- [微糖](suger_type)
-- 我要[微糖](suger_type)
-- [無糖](suger_type)
-- 我要[無糖](suger_type)
+## intent: sugar_select
+- 甜度[台南](sugar_type)
+- 我要[台南]甜度(sugar_type)
+- [正常](sugar_type)甜
+- [全糖](sugar_type)
+- 我要[全糖](sugar_type)
+- [半糖](sugar_type)
+- 我要[半糖](sugar_type)
+- [微糖](sugar_type)
+- 我要[微糖](sugar_type)
+- [無糖](sugar_type)
+- 我要[無糖](sugar_type)
 
-## intent: ice_select+suger_select
-- [半糖](suger_type)[少冰](ice_type)
-- [微糖](suger_type)[去冰](ice_type)
-- [全糖](suger_type)[正常](ice_type)
-- [半糖](suger_type)[少冰](ice_type)
-- [半](suger_type)[少](ice_type)
-- [全](suger_type)[微](ice_type)
-- [半](suger_type)[去](ice_type)
-- [台南](suger_type)[去冰](suger_type)
+## intent: ice_select+sugar_select
+- [半糖](sugar_type)[少冰](ice_type)
+- [微糖](sugar_type)[去冰](ice_type)
+- [全糖](sugar_type)[正常](ice_type)
+- [半糖](sugar_type)[少冰](ice_type)
+- [半](sugar_type)[少](ice_type)
+- [全](sugar_type)[微](ice_type)
+- [半](sugar_type)[去](ice_type)
+- [台南](sugar_type)[去冰](sugar_type)
 
 ## intent: size_select
 - [大杯](size)

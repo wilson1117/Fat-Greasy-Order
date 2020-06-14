@@ -16,12 +16,12 @@
 * ice_select
   - action_option_select
 
-## story_suger_option
-* suger_select
+## story_sugar_option
+* sugar_select
   - action_option_select
 
-## story_ice_suger_option
-* ice_select+suger_select
+## story_ice_sugar_option
+* ice_select+sugar_select
   - action_option_select
 
 ## story_size_select
@@ -33,4 +33,3 @@
   - action_order_check
 * response_check
   - action_send_order
-  

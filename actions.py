@@ -142,26 +142,26 @@ class ActionOptionSelect(Action):
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
         intent = tracker.latest_message['intent'].get('name')
-        if intent == "suger_select" or intent == "ice_select+suger_select":
-            suger = tracker.get_slot("suger_type")
+        if intent == "sugar_select" or intent == "ice_select+sugar_select":
+            sugar = tracker.get_slot("sugar_type")
             found = False
             for key in range(len(ordering["options"])):
                 if ordering["options"][key]["_id"] == ObjectId("5edda69d338a12e97ab1a902"):
                     found = True
-                    if suger in ordering["options"][key]["options"]:
-                        ordering["plus"]["suger"] = suger
+                    if sugar in ordering["options"][key]["options"]:
+                        ordering["plus"]["sugar"] = sugar
                     else:
-                        dispatcher.utter_message(f"不好意思 我們沒有{suger}的選項喔")
+                        dispatcher.utter_message(f"不好意思 我們沒有{sugar}的選項喔")
                     break
                 if ordering["options"][key]["_id"] == ObjectId("5edda4ef338a12e97ab1a900"):
                     found = True
-                    if suger in DB.get_option("5edda630338a12e97ab1a901")["options"]:
-                        ordering["plus"]["suger"] = suger
+                    if sugar in DB.get_option("5edda630338a12e97ab1a901")["options"]:
+                        ordering["plus"]["sugar"] = sugar
                     else:
-                        dispatcher.utter_message(f"不好意思 我們沒有{suger}的選項喔")
+                        dispatcher.utter_message(f"不好意思 我們沒有{sugar}的選項喔")
             if not found:
                 dispatcher.utter_message("不好意思 %s沒有甜度的選擇喔" % ordering["name"])
-        if intent == "ice_select" or intent == "ice_select+suger_select":
+        if intent == "ice_select" or intent == "ice_select+sugar_select":
             ice = tracker.get_slot("ice_type")
             found = False
 
