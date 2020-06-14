@@ -10,6 +10,7 @@ DB = OrderDB()
 orderlist = []
 ordering = None
 asking_field = None
+send_check = False
 
 
 class OrderMethod:
@@ -127,8 +128,10 @@ class ActionStartOrder(Action):
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
         global orderlist
         global ordering
+        global send_check
         orderlist = []
         ordering = None
+        send_check = False
 
         dispatcher.utter_message(template="utter_startOrder")
         return [AllSlotsReset()]
@@ -187,6 +190,12 @@ class ActionOptionSelect(Action):
             for key in range(len(ordering["options"])):
                 if ordering["options"][key]["_id"] == ObjectId("5ede2ded338a12e97ab1a903"):
                     found = True
+                    if "中" in size or size == "不大不小":
+                        size = "中杯"
+                    if "大" in size:
+                        size = "大杯"
+                    if "小" in size:
+                        size = "小杯"
                     if size in ordering["options"][key]["options"]:
                         ordering["plus"]["size"] = size
                     else:
@@ -221,6 +230,8 @@ class ActionOrderCheck(Action):
             sum += price
         dispatcher.utter_message("一共是%d元" % sum)
         dispatcher.utter_message("餐點是否無誤")
+        global send_check
+        send_check = True
         return []
 
 
@@ -234,6 +245,10 @@ class ActionSendOrder(Action):
         global ordering
         global orderlist
         global asking_field
+        global send_check
+        if not send_check:
+            dispatcher.utter_message("")
+            return []
         food = [{
             "name": order["name"],
             "plus": order["plus"],
