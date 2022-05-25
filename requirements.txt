@@ -89,7 +89,7 @@ pycparser==2.20
 pydot==1.4.1
 pygame==1.9.6
 pyglet==1.5.6
-PyJWT==1.7.1
+PyJWT==2.4.0
 pykwalify==1.7.0
 pylint==2.5.2
 pymongo==3.8.0
